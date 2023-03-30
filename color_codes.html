@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Color Codes</title>
+    </head>
+    <body>
+        <h1>Color Codes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Color Type</th>
+                    <th>Pantone</th>
+                    <th>Hex</th>
+                    <th>RGB</th>
+                    <th>CMYK</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for color_type, color_codes in color_codes.items() %}
+                    <tr>
+                        <td>{{ color_type }}</td>
+                        {% if color_type == "Pantone" %}
+                            <td>
+                                <ul>
+                                {% for pantone_code, count in color_codes.items() %}
+                                    <li>{{ pantone_code }} ({{ count }})</li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        {% else %}
+                            {% for color_code in color_codes %}
+                                {% if color_code.type == "hex" %}
+                                    <td></td>
+                                    <td>{{ color_code.value }}</td>
+                                    <td></td>
+                                    <td></td>
+                                {% elif color_code.type == "rgb" %}
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{ color_code.value }}</td>
+                                    <td></td>
+                                {% elif color_code.type == "cmyk" %}
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{ color_code.value }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
+
